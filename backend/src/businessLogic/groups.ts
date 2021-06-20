@@ -1,5 +1,4 @@
 //  The business logic of an application that works with the data layer. 
-
 import { TodoItem } from '../models/TodoItem'
 import { DataLayerAccess } from '../dataLayer/groupsAccess'
 import { CreateTodoRequest } from '../requests/CreateTodoRequest'
@@ -45,7 +44,7 @@ export async function createTodo(
 		attachmentUrl: ''
 	}
 
-	logger.info('Item to be created at business logic', item)
+	logger.info('Creating item with business logic', item)
 	const toReturn = dataLayerAccess.createTodo(item)
 
 	return toReturn
