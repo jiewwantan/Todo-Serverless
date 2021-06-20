@@ -10,7 +10,7 @@ const logger = createLogger('generateUploadUrls')
 
 export const handler = middy(
 	async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-		logger.info('Processing generateUploadUrl Event: ', {
+		logger.info('Executing generateUploadUrl event ...', {
 			event
 		})
 

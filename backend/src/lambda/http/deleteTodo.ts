@@ -12,7 +12,7 @@ export const handler = middy(
 	async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
 		const todoId = event.pathParameters.todoId
 
-		logger.info('At delete lambda function', {
+		logger.info('Executing deleteTodo event ...', {
 			event
 		})
 
