@@ -1,12 +1,13 @@
+
 import {CustomAuthorizerEvent, CustomAuthorizerHandler, CustomAuthorizerResult} from 'aws-lambda'
 import 'source-map-support/register'
 
 import { verify, decode } from 'jsonwebtoken'
-import { createLogger } from '../../utils/logger'
-import Axios from 'axios'
 import { Jwt } from '../../auth/Jwt'
 import { JwtPayload } from '../../auth/JwtPayload'
 import jwkToPem from 'jwk-to-pem'
+import { createLogger } from '../../utils/logger'
+import Axios from 'axios'
 
 const logger = createLogger('auth')
 
@@ -17,7 +18,7 @@ export const handler: CustomAuthorizerHandler = async (
 ): Promise<CustomAuthorizerResult> => {
 	try {
 		const jwtToken = await verifyToken(event.authorizationToken)
-		logger.info('Authorization granted, { jwtToken: jwtToken })
+		logger.info('User was authorized', { jwtToken: jwtToken })
 		return {
 			principalId: jwtToken.sub,
 			policyDocument: {
@@ -32,7 +33,7 @@ export const handler: CustomAuthorizerHandler = async (
 			}
 		}
 	} catch (e) {
-		logger.error('Authorization not granted', { error: e.message })
+		logger.error('User was not authorized', { error: e.message })
 		return {
 			principalId: 'user',
 			policyDocument: {
