@@ -53,7 +53,7 @@ export class DataLayerAccess {
 
 		if (todoToBeDeleted.Items.length === 0) {
 			result.statusCode = 404
-			result.body = 'The item to be deleted was not found'
+			result.body = 'Nothing is deleted. The item is not found'
 			return result
 		}
 
@@ -109,12 +109,12 @@ export class DataLayerAccess {
 			})
 			.promise()
 
-		logger.info('Item to be updated', todoToBeUpdate)
+		logger.info('Update in progress ..', todoToBeUpdate)
 
 		if (todoToBeUpdate.Items.length === 0) {
 			result = {
 				statusCode: 404,
-				body: 'The item to be update was not found'
+				body: 'Nothing is updated. The item is not found'
 			}
 			return result
 		}
@@ -183,7 +183,7 @@ export class DataLayerAccess {
 		if (checkIfExist.Items.length === 0) {
 			result = {
 				statusCode: 404,
-				body: 'The item to be update was not found'
+				body: 'Error encountered. Nothing is uploaded.'
 			}
 			return result
 		}
@@ -215,7 +215,7 @@ export class DataLayerAccess {
 }
 function createDynamoDBClient(): AWS.DynamoDB.DocumentClient {
 	if (process.env.IS_OFFLINE) {
-		logger.info('Creating a local DynamoDB instance')
+		logger.info('Creating DynamoDB instance ...')
 		return new XAWS.DynamoDB.DocumentClient({
 			region: 'localhost',
 			endpoint: 'http://localhost:8000'
